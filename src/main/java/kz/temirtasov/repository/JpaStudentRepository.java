@@ -41,6 +41,7 @@ public class JpaStudentRepository implements StudentRepository {
 
     @Override
     public List<Student> getAll() {
-        return em.createNamedQuery(Student.ALL_SORTED, Student.class).getResultList();
+        List<Student> resultList = em.createNamedQuery(Student.ALL_SORTED, Student.class).getResultList();
+        return resultList;
     }
 }

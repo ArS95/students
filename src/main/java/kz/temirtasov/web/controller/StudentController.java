@@ -5,13 +5,16 @@ import kz.temirtasov.repository.StudentRepository;
 
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.io.Serializable;
 import java.util.List;
 
 @Named
-@ApplicationScoped
-public class StudentController {
+@RequestScoped
+public class StudentController  {
 
     @Inject
     private StudentRepository repository;
