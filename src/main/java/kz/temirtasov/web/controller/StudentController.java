@@ -1,23 +1,26 @@
 package kz.temirtasov.web.controller;
 
 import kz.temirtasov.model.Student;
-import kz.temirtasov.repository.StudentRepository;
+import kz.temirtasov.repository.EJBStudentRepository;
 
-
-import javax.enterprise.context.ApplicationScoped;
-import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.List;
 
 @Named
-@RequestScoped
-public class StudentController  {
+public class StudentController implements Serializable {
+
+    private List<Student> students;
 
     @Inject
-    private StudentRepository repository;
+    private EJBStudentRepository repository;
+
+    @PostConstruct
+    public void init() {
+        this.students = repository.getAll();
+    }
 
     public void delete(int id) {
         repository.delete(id);
@@ -27,12 +30,11 @@ public class StudentController  {
         repository.save(student);
     }
 
-    public Student get(int id) {
-        return repository.get(id);
+    public List<Student> getStudents() {
+        return students;
     }
 
-    public List<Student> getAll() {
-        return repository.getAll();
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
-
 }

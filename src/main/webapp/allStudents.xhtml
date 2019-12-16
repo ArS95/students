@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+<!--<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">-->
+
+<!--<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">-->
+
+
+<h:head>
+    <title>Welcome Screen</title>
+</h:head>
+<h:body>
+    <h:form>
+        <!--        <p:growl id="growl" sticky="true" />-->
+        <p:dataTable id="studentList" var="student" value="#{studentController.students}">
+            <p:column headerText="Id">
+                <h:outputText value="#{student.id}"/>
+            </p:column>
+
+            <p:column headerText="FullName">
+                <h:outputText value="#{student.fullName}"/>
+            </p:column>
+
+            <p:column headerText="Faculty">
+                <h:outputText value="#{student.faculty}"/>
+
+            </p:column>
+
+            <!--            <p:column>-->
+            <!--                <p:commandButton update="customerList" value="Delete" icon="ui-icon-closethick"-->
+            <!--                                 action="#{customersBacking.delete(customer)}"-->
+            <!--                                 styleClass="ui-priority-primary">-->
+            <!--                </p:commandButton>-->
+            <!--            </p:column>-->
+        </p:dataTable>
+        <br/>
+        <!--        <p:commandButton style="float: right" id="save" value="Save" tyleClass="ui-priority-primary"
+                                 action="#{customersBacking.update}" icon="ui-icon-disk" update="growl">
+                </p:commandButton>-->
+    </h:form>
+</h:body>
+</html>
