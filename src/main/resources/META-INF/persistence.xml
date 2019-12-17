@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence"
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
-    <persistence-unit name="studentsUnit" transaction-type="JTA">
+             xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+    <persistence-unit name="studentsUnit">
+
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <!--<jta-data-source>students</jta-data-source>
+        <non-jta-data-source>studentsUn</non-jta-data-source>-->
+        <class>kz.temirtasov.model.Student</class>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL95Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
@@ -14,6 +19,7 @@
             <property name="javax.persistence.jdbc.password" value="password"/>
         </properties>
     </persistence-unit>
+
 </persistence>
 
 

@@ -2,18 +2,25 @@ package kz.temirtasov.repository;
 
 import kz.temirtasov.model.Student;
 
-import javax.inject.Singleton;
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Singleton
+
 public class EJBStudentRepository {
 
-    @PersistenceContext(unitName = "studentsUnit")
+//    @PersistenceUnit(unitName = "studentsUnit")
     private EntityManager em;
 
+
+    @PostConstruct
+    protected void getEntityManager() {
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("studentsUnit");
+        em = emf.createEntityManager();
+    }
     @Transactional
     public Student save(Student student) {
         if (student.isNew()) {

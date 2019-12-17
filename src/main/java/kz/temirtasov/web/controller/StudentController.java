@@ -6,16 +6,19 @@ import kz.temirtasov.repository.EJBStudentRepository;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.io.Serializable;
 import java.util.List;
 
 @Named
-public class StudentController implements Serializable {
+public class StudentController {
 
     private List<Student> students;
 
     @Inject
     private EJBStudentRepository repository;
+
+    public EJBStudentRepository getRepository() {
+        return repository;
+    }
 
     @PostConstruct
     public void init() {
