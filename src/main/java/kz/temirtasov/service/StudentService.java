@@ -1,11 +1,10 @@
-package kz.temirtasov.repository;
-
+package kz.temirtasov.service;
 
 import kz.temirtasov.model.Student;
 
 import java.util.List;
 
-public interface StudentRepository {
+public interface StudentService {
     Student save(Student student);
 
     Student update(Student student);

@@ -1,54 +1,62 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:f="http://java.sun.com/jsf/core">
-
-<!--<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">-->
-
-<!--<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:p="http://primefaces.org/ui">-->
-
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title>Welcome Screen</title>
+    <title>Welcome my Friend</title>
+    <link rel="stylesheet" href="css/style.css"/>
 </h:head>
 <h:body>
-    <h:form>
-        <!--        <p:growl id="growl" sticky="true" />-->
-        <p:dataTable id="studentList" var="student" value="#{studentController.students}">
-            <p:column headerText="Id">
-                <h:outputText value="#{student.id}"/>
-            </p:column>
+    <h:form id="form">
+        <p:growl id="msgs" showDetail="true"/>
+
+        <p:dataTable id="students" var="student" value="#{studentController.students}" editable="true"
+                     widgetVar="dt">
+            <f:facet name="header">
+                All students
+            </f:facet>
+
+            <p:ajax event="rowEdit" listener="#{studentController.onRowEdit}" update=":form:msgs"/>
+            <p:ajax event="rowEditCancel" listener="#{studentController.onRowCancel}" update=":form:msgs"/>
 
             <p:column headerText="FullName">
-                <h:outputText value="#{student.fullName}"/>
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{student.fullName}"/></f:facet>
+                    <f:facet name="input"><p:inputText value="#{student.fullName}" label="FullName"/></f:facet>
+                </p:cellEditor>
             </p:column>
 
             <p:column headerText="Faculty">
-                <h:outputText value="#{student.faculty}"/>
-
+                <p:cellEditor>
+                    <f:facet name="output"><h:outputText value="#{student.faculty}"/></f:facet>
+                    <f:facet name="input"><p:inputText value="#{student.faculty}"
+                                                       label="Faculty"/></f:facet>
+                </p:cellEditor>
             </p:column>
 
-            <!--            <p:column>-->
-            <!--                <p:commandButton update="customerList" value="Delete" icon="ui-icon-closethick"-->
-            <!--                                 action="#{customersBacking.delete(customer)}"-->
-            <!--                                 styleClass="ui-priority-primary">-->
-            <!--                </p:commandButton>-->
-            <!--            </p:column>-->
+            <p:column headerText="Delete">
+                <p:commandButton value="Delete" icon="ui-icon-closethick"
+                                 action="#{studentController.delete(student.id)}"
+                                 styleClass="ui-priority-primary" update="students">
+                </p:commandButton>
+            </p:column>
+
+            <p:column style="width:35px">
+                <p:rowEditor/>
+            </p:column>
         </p:dataTable>
-        <br/>
-        <!--        <p:commandButton style="float: right" id="save" value="Save" tyleClass="ui-priority-primary"
-                                 action="#{customersBacking.update}" icon="ui-icon-disk" update="growl">
-                </p:commandButton>-->
+
+        <div class="container">
+            <p:commandButton value="Add" actionListener="#{studentController.addStudent}"
+                             oncomplete="PF('dt').addRow()"
+                             process="@this"/>
+        </div>
+
     </h:form>
 </h:body>
 </html>

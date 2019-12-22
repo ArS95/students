@@ -1,5 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
@@ -7,37 +8,34 @@
       xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-    <title>JSF 2.0 Hello World</title>
+    <title>Authorization</title>
 </h:head>
 <h:body>
-    <h3>JSF 2.0 Hello World Example - hello.xhtml</h3>
-    <h:form id="customers">
-<!--        <p:growl id="growl" sticky="true"/>-->
-        <p:dataTable id="studentList" var="student" value="#{studentController.students}">
-            <p:column headerText="Id">
-                <h:outputText value="#{student.id}"/>
-            </p:column>
+    <h:form id="Check">
+        <h:form>
+            <p:panel id="panel" header="Authorization" style="width: 500px;  margin: auto">
 
-            <p:column headerText="FullName">
-                <h:outputText value="#{student.fullName}"/>
-            </p:column>
+                <p:messages id="msgs"/>
 
-            <p:column headerText="Faculty">
-                <h:outputText value="#{student.faculty}"/>
-            </p:column>
+                <h:panelGrid columns="3" cellpadding="5" >
+                    <p:outputLabel for="login" value="Login:"/>
+                    <p:inputText id="login" value="#{user.login}" required="true" label="Login">
+                        <f:validateLength minimum="4"/>
+                    </p:inputText>
+                    <p:message for="login" display="icon"/>
 
-            <p:column>
-                <p:commandButton update="st" value="Delete" icon="ui-icon-closethick"
-                                 action="#{customersBacking.delete(customer)}"
-                                 styleClass="ui-priority-primary">
-                </p:commandButton>
-            </p:column>
-        </p:dataTable>
-        <br/>
-      <!--  <p:commandButton style="float: right" id="save" value="Save" tyleClass="ui-priority-primary"
-                         action="#{customersBacking.update}" icon="ui-icon-disk" update="growl">
-            <f:ajax execute="@form" render="@form"/>
-        </p:commandButton>-->
+                    <p:outputLabel for="password" value="Password:"/>
+                    <p:inputText id="password" value="#{user.password}" label="Password" required="true">
+                        <f:validateLength minimum="4"/>
+                        <p:ajax update="msgLogin" event="keyup"/>
+                    </p:inputText>
+                    <p:message for="password" id="msgLogin" display="icon"/>
+
+                </h:panelGrid>
+
+                <h:commandButton value="Log in" update="panel" action="#{user.checkAuthorization}" icon="pi pi-check"/>
+            </p:panel>
+        </h:form>
     </h:form>
 </h:body>
 </html>

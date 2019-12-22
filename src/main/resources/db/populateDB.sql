@@ -1,3 +1,4 @@
+DELETE
 FROM students;
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 

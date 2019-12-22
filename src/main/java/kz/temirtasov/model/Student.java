@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @NamedQueries({
         @NamedQuery(name = Student.DELETE, query = "DELETE FROM Student s WHERE s.id=:id"),
-        @NamedQuery(name = Student.ALL_SORTED, query = "SELECT s FROM Student s")
+        @NamedQuery(name = Student.ALL_SORTED, query = "SELECT s FROM Student s ORDER BY s.id")
 })
 @Entity
 @Table(name = "students")
